@@ -1,4 +1,4 @@
-const{insert_into_db,createConnection,fetch_db}=require('./insert_into_db');
+const{insert_into_db,fetch_db}=require('./insert_into_db');
 
 require('dotenv').config();
 const path=require('path');
