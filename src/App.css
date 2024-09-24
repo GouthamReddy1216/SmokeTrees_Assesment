@@ -1,0 +1,151 @@
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.App {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
+
+.App::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  border-left: 2px dashed #cbd5e0;
+  transform: translateX(-50%);
+}
+
+.insertform, .searchform {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.form-description {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+input, textarea {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+button {
+  background-color: #4299e1;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3182ce;
+}
+.message {
+  color: #4a5568;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.fetched-addresses {
+  margin-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.fetched-addresses h3 {
+  font-size: 1rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.fetched-addresses ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.fetched-addresses li {
+  background-color: #edf2f7;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .App {
+    flex-direction: column;
+    max-width: 500px;
+  }
+  
+  .App::after {
+    left: 10%;
+    right: 10%;
+    top: 50%;
+    bottom: auto;
+    border-left: none;
+    border-top: 2px dashed #cbd5e0;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 1rem;
+  }
+
+  input, textarea, button {
+    font-size: 0.9rem;
+  }
+}
