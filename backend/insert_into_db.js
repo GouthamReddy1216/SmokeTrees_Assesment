@@ -25,15 +25,17 @@ function insert_into_db(name, address) {
         }
         else{
         console.log("Connected to DB");
-        const search_if_user_exists=`select ID from USERS where NAME=?`
+        const search_if_user_exists=`select ID from users where NAME=?`
         const query1 = 'INSERT INTO users (name) VALUES (?)';
-        const query2='INSERT INTO ADDRESS (address,user_ID) VALUES(?,?)';
-        
+        const query2='INSERT INTO address (address,user_ID) VALUES(?,?)';
+
         connection.query(search_if_user_exists,[name],(err,res)=>{
             if(err)
             {
                 console.error("Error executing searcing id of existing user:", err);
+                connection.end();
                 return reject({ success: false });
+                
             }
             if(res.length===0)
             {
@@ -41,12 +43,14 @@ function insert_into_db(name, address) {
               connection.query(query1, [name], (err, res) => {
                 if (err) {
                   console.error("Error executing query1:", err);
+                  connection.end();
                   return reject({ success: false });
                 }
                 const user_id=res.insertId;
                 connection.query(query2,[address,user_id],(err,res)=>{
                   if (err) {
                       console.error("Error executing query2:", err);
+                      connection.end();
                       return reject({ success: false });
                     }
                     console.log("Data inserted successfully");
@@ -64,6 +68,7 @@ function insert_into_db(name, address) {
                 connection.query(query2,[address,user_id],(err,res)=>{
                     if (err) {
                         console.error("Error executing query2:", err);
+                        connection.end();
                         return reject({ success: false });
                       }
                       console.log("Data inserted successfully");
@@ -91,8 +96,8 @@ function fetch_db(name){
             connection.query(query1,[name],(err,res)=>{
                 if(err){
                     console.log(err);
-                    reject({success:false});
                     connection.end();
+                    reject({success:false});
                 }
                 else{
                     if(res.length>0)
@@ -104,19 +109,20 @@ function fetch_db(name){
                         {
                             console.log(err);
                             connection.end();
+                            reject({success:false});
                         }
                         else
                         {
                             const newdata=res.map((ele)=>{return ele.Your_Address});
-                            resolve({success:true,iswrongname:false,addresses:newdata});
                             connection.end();
+                            resolve({success:true,iswrongname:false,addresses:newdata});
                         }
                     }
                     )
                   }
                   else{
-                    resolve({success:true,iswrongname:true,addresses:[]});
                     connection.end();
+                    resolve({success:true,iswrongname:true,addresses:[]});
                   }
                 }
             })
